@@ -128,7 +128,7 @@ async def main(x: float, y: float, width: int, height: int, name: str = "result_
             row = center_row + row_offset
             column = center_column + column_offset
             govmap_filepath = f"L{zoom:02}/R{row:08x}/C{column:08x}.png"
-            filename = f"tiles/{govmap_filepath}"
+            filename = f"tiles_cache/{govmap_filepath}"
             column_arr.append(filename)
             request_url = f"{GOVMAP_CDN}/{MAP_NAME_25K}/{govmap_filepath}"
 
