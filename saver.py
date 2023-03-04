@@ -6,8 +6,8 @@ import os.path
 import pyproj
 from PIL import Image
 
-GOVMAP_CDN = "https://cdnil.govmap.gov.il"
-MAP_NAME_25K = "11072021MAP25K"
+GOVMAP_CDN = "https://cdn.govmap.gov.il"
+MAP_NAME_25K = "022023MAP25KTO"
 MAP_LODS = [
     {
         "level": 0,
@@ -67,7 +67,9 @@ GOVMAP_WKID = f"{EPSG_PREFIX}2039"
 WGS84_WKID = f"{EPSG_PREFIX}4326"
 TRANSFORMER = pyproj.Transformer.from_crs(crs_from=WGS84_WKID, crs_to=GOVMAP_WKID)
 
-REQUEST_HEADERS = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"}
+REQUEST_HEADERS = {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+}
 
 
 def transform(longitude: float, latitude: float):
