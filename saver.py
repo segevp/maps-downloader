@@ -72,7 +72,7 @@ REQUEST_HEADERS = {
 }
 
 
-def transform(longitude: float, latitude: float):
+def transform_coordinates(longitude: float, latitude: float):
     return TRANSFORMER.transform(latitude, longitude)
 
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     # lon, lat = name_to_coordinates(address)
 
     lat, lon = 30.82717509247067, 34.825035482754366
-    x, y = transform(longitude=lon, latitude=lat)
+    x, y = transform_coordinates(longitude=lon, latitude=lat)
 
     width, height = 3_000, 2_000
 
