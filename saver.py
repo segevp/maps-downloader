@@ -7,7 +7,7 @@ import pyproj
 from PIL import Image
 
 GOVMAP_CDN = "https://cdn.govmap.gov.il"
-MAP_NAME_25K = "022023MAP25KTO"
+MAP_NAME_25K = "2024MAP25KTO"
 MAP_LODS = [
     {
         "level": 0,
@@ -104,7 +104,7 @@ def merge_images(arr):
     width, height = Image.open(arr[0][0]).size
 
     # Create a new image with the same size
-    result = Image.new('RGB', (width * len(arr), height * len(arr[0])))
+    result = Image.new('RGBA', (width * len(arr), height * len(arr[0])))
 
     # Iterate through the array and paste each image into the result
     for i in range(len(arr)):
@@ -148,9 +148,9 @@ if __name__ == '__main__':
     # address = "דרךדרך ירושלים 13, רחובות ירושלים 13, רחובות"
     # lon, lat = name_to_coordinates(address)
 
-    lat, lon = 30.82717509247067, 34.825035482754366
+    lat, lon = 31.350827296467003, 34.827774412648175
     x, y = transform_coordinates(longitude=lon, latitude=lat)
 
-    width, height = 3_000, 2_000
+    width, height = 3500, 3000
 
     asyncio.run(main(x, y, width, height))
