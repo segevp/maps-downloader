@@ -100,19 +100,25 @@ async def download_image(url, filename):
 
 
 def merge_images(arr):
-    # Get the width and height of the images
     width, height = Image.open(arr[0][0]).size
 
-    # Create a new image with the same size
-    result = Image.new('RGBA', (width * len(arr), height * len(arr[0])))
+    # Create the result image in RGB mode with white background
+    result = Image.new('RGB', (width * len(arr), height * len(arr[0])), (255, 255, 255))
 
-    # Iterate through the array and paste each image into the result
     for i in range(len(arr)):
         for j in range(len(arr[i])):
-            img = Image.open(arr[i][j])
-            result.paste(img, (i * width, j * height))
-    return result
+            img = Image.open(arr[i][j]).convert('RGBA')
 
+            # Create a white background
+            white_bg = Image.new('RGB', img.size, (255, 255, 255))
+
+            # Paste the image on top using alpha as mask
+            white_bg.paste(img, mask=img.split()[3])  # img.split()[3] is the alpha channel
+
+            # Paste the flattened image into the result
+            result.paste(white_bg, (i * width, j * height))
+
+    return result
 
 async def main(x: float, y: float, width: int, height: int, name: str = "result_map_2.png"):
     zoom = 2
@@ -145,12 +151,9 @@ async def main(x: float, y: float, width: int, height: int, name: str = "result_
 
 
 if __name__ == '__main__':
-    # address = "דרךדרך ירושלים 13, רחובות ירושלים 13, רחובות"
-    # lon, lat = name_to_coordinates(address)
-
-    lat, lon = 31.350827296467003, 34.827774412648175
+    lat, lon = 31.325787586943726, 34.83329607049938
     x, y = transform_coordinates(longitude=lon, latitude=lat)
 
-    width, height = 3500, 3000
+    width, height = 3500, 5500
 
     asyncio.run(main(x, y, width, height))
